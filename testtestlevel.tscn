@@ -1,6 +1,5 @@
 [gd_scene load_steps=17 format=3 uid="uid://m6kkharqhi5t"]
 
-[ext_resource type="PackedScene" uid="uid://cvkoquuamgmak" path="res://World/Blends/Warehouse.blend" id="2_udcq1"]
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
 [ext_resource type="PackedScene" uid="uid://dcb2p6ru68sko" path="res://World/assets glb/cardboard_test.glb" id="4_g6af4"]
@@ -8,17 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://ban4a5fgovf5j" path="res://World/assets glb/rubble2.glb" id="6_2idi0"]
 [ext_resource type="ArrayMesh" uid="uid://ctqmk0mmtrtqg" path="res://World/assets obj/boxes2.obj" id="10_ts1ha"]
 [ext_resource type="Texture2D" uid="uid://u3b110rpbqth" path="res://World/assets glb/textures/box2_Cardboard003_1K-JPG_Color.jpg" id="11_evxwe"]
+[ext_resource type="PackedScene" uid="uid://cadqmi1p38m5" path="res://World/Blends/Warehouse_taavi.blend" id="11_ts1ha"]
 [ext_resource type="PackedScene" uid="uid://buiitouvt7lgh" path="res://World/assets glb/small_tube1.glb" id="12_clck5"]
 [ext_resource type="ArrayMesh" uid="uid://b5ml4o71w6p2" path="res://World/assets obj/boxes1.obj" id="13_2idi0"]
 [ext_resource type="Texture2D" uid="uid://ch4xd1oo3ivi4" path="res://World/assets glb/textures/box1_Cardboard001_1K-JPG_Color.jpg" id="14_lcnlk"]
 
 [sub_resource type="Environment" id="Environment_ct5qx"]
-background_mode = 1
-background_color = Color(0.20897022, 0.2680178, 0.13768971, 1)
+background_mode = 2
+background_color = Color(0.36666527, 0.41233996, 0.2596829, 1)
 fog_enabled = true
-fog_light_color = Color(0.73654544, 0.76034045, 0.8790501, 1)
-fog_height = 0.05
-fog_height_density = 0.02
+fog_depth_end = 4000.0
+volumetric_fog_density = 0.3941
+volumetric_fog_emission_energy = 3.45
+volumetric_fog_gi_inject = 6.74
+volumetric_fog_length = 65.85
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lcnlk"]
 size = Vector3(1.5212402, 1, 1)
@@ -35,15 +37,7 @@ albedo_texture = ExtResource("11_evxwe")
 [node name="testtestlevel" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.534591)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(2.7, 0, 0, 0, 1, 0, 0, 0, 1, -1.85, -0.5, 1.5)
-use_collision = true
-size = Vector3(26, 1, 42)
-
-[node name="Warehouse" parent="." instance=ExtResource("2_udcq1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.668663, 0, 5.5449085)
 
 [node name="rubble1" parent="." instance=ExtResource("3_k0hlf")]
 transform = Transform3D(2.03, 0, 0, 0, 2.03, 0, 0, 0, 2.03, 8.480824, 0.26996398, 15.56008)
@@ -56,7 +50,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.299265, 0.36807272, -2.283
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 24, 0)
+visible = false
 light_color = Color(0.7635822, 0.78893894, 0.8821072, 1)
+shadow_bias = 1.852
+shadow_normal_bias = 0.0
+shadow_reverse_cull_face = true
+shadow_transmittance_bias = 2.029
+shadow_opacity = 0.85
+shadow_blur = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ct5qx")
@@ -87,3 +88,6 @@ shape = SubResource("BoxShape3D_11wgs")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = ExtResource("10_ts1ha")
 surface_material_override/0 = SubResource("StandardMaterial3D_asde0")
+
+[node name="Warehouse_taavi" parent="." instance=ExtResource("11_ts1ha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.592638, 2.2458177, 8.729292)
