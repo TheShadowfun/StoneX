@@ -86,7 +86,9 @@ rotate_roll_right={
 
 [physics]
 
+3d/run_on_separate_thread=true
 3d/physics_engine="GodotPhysics3D"
+3d/solver/solver_iterations=8
 
 [rendering]
 

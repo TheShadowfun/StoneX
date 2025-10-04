@@ -11,14 +11,18 @@ var previous_camera_transform: Transform3D
 
 # Adjustable distances and movement strength
 @export var hold_distance: float = 4.0
-@export var hold_distance_min: float = 1.0
+@export var hold_distance_min: float = 2.5
 @export var hold_distance_max: float = 6.0
 @export var scroll_sensitivity: float = 0.5
 @export var attraction_force: float = 30.0
 @export var max_pickup_distance: float = 8.0
 
+var held_object_original_layers: int = 0
+var held_object_original_masks: int = 0
+
 # State tracking
 var held_object: RigidBody3D = null
+
 
 var _sun_level = 5.0 #should only be modified through intermediate functions
 const _sun_level_max = 10 #we should choose a max sun level
@@ -110,6 +114,10 @@ func try_grab_object():
 		var target = grab_ray.get_collider()
 		if target is RigidBody3D:
 			held_object = target
+			held_object_original_layers = held_object.collision_layer
+			held_object_original_masks = held_object.collision_mask
+			held_object.collision_layer = 2  # Remove layer 1
+			held_object.collision_mask = 2
 			held_object.gravity_scale = 0.0
 			held_object.linear_damp = 10
 			held_object.angular_damp = 10
@@ -117,6 +125,8 @@ func try_grab_object():
 func release_object():
 	if held_object:
 		held_object.gravity_scale = 5.0
+		held_object.collision_layer = held_object_original_layers
+		held_object.collision_mask = held_object_original_masks
 		held_object = null
 
 func move_held_object(_delta):
