@@ -22,6 +22,8 @@ var held_object_original_masks: int = 0
 
 # State tracking
 var held_object: RigidBody3D = null
+var highlighting_interactable = false
+var interactable = null
 
 
 var _sun_level = 5.0 #should only be modified through intermediate functions
@@ -32,6 +34,7 @@ const sun_charge_per_sec= 1.0
 const sun_decay_per_second = -0.2
 
 signal sun_level_changed(new_level: float)
+signal button_pressed()
 
 func _ready():
 	grab_ray.target_position.z = -max_pickup_distance
@@ -108,20 +111,6 @@ func update_hold_position():
 	var forward = -camera.global_transform.basis.z
 	hold_position.global_transform.origin = camera.global_transform.origin + forward * hold_distance
 
-func try_grab_object():
-	grab_ray.force_raycast_update()
-	if grab_ray.is_colliding():
-		var target = grab_ray.get_collider()
-		if target is RigidBody3D:
-			held_object = target
-			held_object_original_layers = held_object.collision_layer
-			held_object_original_masks = held_object.collision_mask
-			held_object.collision_layer = 2  # Remove layer 1
-			held_object.collision_mask = 2
-			held_object.gravity_scale = 0.0
-			held_object.linear_damp = 10
-			held_object.angular_damp = 10
-
 func release_object():
 	if held_object:
 		held_object.gravity_scale = 5.0
@@ -153,6 +142,28 @@ func modify_sun_level(change):
 	_sun_level = clamp(_sun_level + change, _sun_level_min, _sun_level_max)
 	emit_signal("sun_level_changed", _sun_level)
 	
+func detect_interactables():
+	grab_ray.force_raycast_update()
+	if grab_ray.is_colliding():
+		var target = grab_ray.get_collider()
+		if target.is_in_group("button") and Input.is_action_just_pressed("ui_accept"):
+			emit_signal("button_pressed")
+			return
+		
+		if target.is_in_group("movable"):
+			if Input.is_action_just_pressed("gravity_grab"):
+				held_object = target
+				held_object_original_layers = held_object.collision_layer
+				held_object_original_masks = held_object.collision_mask
+				held_object.collision_layer = 2  #Set object to different collision layer, which player isn't on
+				held_object.collision_mask = 2
+				held_object.gravity_scale = 0.0
+				held_object.linear_damp = 10
+				held_object.angular_damp = 10
+				
+			elif not target.is_glowing():
+				target.start_glowing()
+		
 func _physics_process(delta):
 	const SPEED = 5.5
 	
@@ -171,17 +182,16 @@ func _physics_process(delta):
 	
 	# magnet grabbing
 	update_hold_position()
-		
-	if Input.is_action_just_pressed("gravity_grab"):
-		if held_object:
-			release_object()
-		else:
-			try_grab_object()
 			
 	if held_object:
 		move_held_object(delta)
 		rotate_held_object(delta)
 		apply_camera_rotation_to_held_object()
+		
+		if Input.is_action_just_pressed("gravity_grab"):
+			release_object()
+	
+	detect_interactables()
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = 10
