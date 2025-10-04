@@ -1,7 +1,7 @@
 # Blender 4.3.2
 # www.blender.org
-mtllib boxes1.mtl
-o BOX
+mtllib boxesSPECIAL.mtl
+o BOX_SPECIAL
 v -0.549387 1.001693 -0.540263
 v -0.524603 0.978260 -0.537857
 v 0.715770 0.054044 0.173093
@@ -610,7 +610,7 @@ vt 0.671964 0.331439
 vt 0.304066 0.696705
 vt -0.000000 0.630147
 s 0
-usemtl CARDBOARD
+usemtl CARDBOARD_SPECIAL
 f 54/1/1 71/2/1 22/3/1
 f 130/4/2 113/5/2 31/6/2
 f 69/7/3 74/8/3 85/9/3
