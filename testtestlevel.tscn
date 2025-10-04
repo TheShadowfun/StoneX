@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=41 format=3 uid="uid://m6kkharqhi5t"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://u3b110rpbqth" path="res://World/assets glb/textures/box2_Cardboard003_1K-JPG_Color.jpg" id="11_evxwe"]
 [ext_resource type="PackedScene" uid="uid://cadqmi1p38m5" path="res://World/Blends/Warehouse_taavi.blend" id="11_ts1ha"]
 [ext_resource type="PackedScene" uid="uid://buiitouvt7lgh" path="res://World/assets glb/small_tube1.glb" id="12_clck5"]
+[ext_resource type="PackedScene" uid="uid://dch6lk2wsixkx" path="res://World/assets glb/big_pipe.glb" id="12_evxwe"]
 [ext_resource type="ArrayMesh" uid="uid://b5ml4o71w6p2" path="res://World/assets obj/boxes1.obj" id="13_2idi0"]
-[ext_resource type="PackedScene" uid="uid://dkt51ylhlksy" path="res://warehouse_taavi.tscn" id="13_lcnlk"]
 [ext_resource type="ArrayMesh" uid="uid://ctxwky6rrwsyr" path="res://World/assets obj/boxes3.obj" id="14_11wgs"]
 [ext_resource type="Texture2D" uid="uid://ch4xd1oo3ivi4" path="res://World/assets glb/textures/box1_Cardboard001_1K-JPG_Color.jpg" id="14_lcnlk"]
 [ext_resource type="Texture2D" uid="uid://ci58mo7q3gqxl" path="res://World/assets glb/box3_Cardboard001_1K-JPG_Color.jpg" id="15_asde0"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://br7ropb8kt04p" path="res://World/assets glb/Cardboard001_1K-SPECIAL.jpg" id="22_r7ej7"]
 [ext_resource type="ArrayMesh" uid="uid://dhkpcipm8l1eo" path="res://World/assets obj/RUBBLE_PART2.obj" id="23_6r2q7"]
 [ext_resource type="Texture2D" uid="uid://dw6j1pdm31pes" path="res://World/assets glb/rubble1_Concrete035_1K-JPG_Color.jpg" id="24_n4rbb"]
+[ext_resource type="PackedScene" uid="uid://cr7pfsd65fcha" path="res://World/assets glb/Big_pipe_2.glb" id="24_yp3us"]
 
 [sub_resource type="Environment" id="Environment_ct5qx"]
 background_mode = 2
@@ -80,7 +81,7 @@ albedo_texture = ExtResource("24_n4rbb")
 [node name="testtestlevel" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 33.71271, 0, 2.6330047)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20.495928, 0, 16.786703)
 
 [node name="rubble1" parent="." instance=ExtResource("3_k0hlf")]
 transform = Transform3D(-2.0240877, 0, -0.15482092, 0, 2.0299995, 0, 0.15482092, 0, -2.0240877, 0.5153856, 0.073016524, 1.1892805)
@@ -102,7 +103,7 @@ shadow_blur = 0.0
 environment = SubResource("Environment_ct5qx")
 
 [node name="rubble2" parent="." instance=ExtResource("6_2idi0")]
-transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 20.537937, 0.11243129, 12.296041)
+transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 23.379955, -0.15046906, 12.296041)
 
 [node name="small_tube12" parent="." instance=ExtResource("12_clck5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9170132, 0.62007, 10.831703)
@@ -133,10 +134,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_asde0")
 
 [node name="Warehouse_taavi" parent="." instance=ExtResource("11_ts1ha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.592638, 2.2458177, 8.729292)
-visible = false
-
-[node name="Warehouse_taavi2" parent="." instance=ExtResource("13_lcnlk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.420086, 2.4962444, 8.851814)
 
 [node name="rubble3" parent="." instance=ExtResource("6_2idi0")]
 transform = Transform3D(-0.51489466, 0, 1.9791182, 0, 2.045, 0, -1.9791182, 0, -0.51489466, 20.59586, -0.4076749, 11.655128)
@@ -202,7 +199,7 @@ mesh = ExtResource("21_3df6v")
 surface_material_override/0 = SubResource("StandardMaterial3D_n4rbb")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(0.6846871, 0, -0.7288372, 0, 1, 0, 0.7288372, 0, 0.6846871, 13.143593, 0, 8.253976)
+transform = Transform3D(0.6846871, 0, -0.7288372, 0, 1, 0, 0.7288372, 0, 0.6846871, 20.676971, 0, 20.110939)
 script = ExtResource("7_evxwe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -210,5 +207,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22205228, -0.018205643, -0.
 shape = SubResource("BoxShape3D_yp3us")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0960789, 0, -1.0296831)
 mesh = ExtResource("23_6r2q7")
 surface_material_override/0 = SubResource("StandardMaterial3D_qx7ok")
+
+[node name="Big_pipe_2" parent="." instance=ExtResource("24_yp3us")]
+transform = Transform3D(6.794811e-08, 0.9, -3.934025e-08, 0, -3.934025e-08, -0.9, -0.9, 6.794811e-08, -2.9701062e-15, 19.105795, 1.7942212, 2.4890285)
+
+[node name="big_pipe" parent="." instance=ExtResource("12_evxwe")]
+transform = Transform3D(-1.3113416e-08, 0, -0.29999998, 0, 0.29999998, 0, 0.29999998, 0, -1.3113416e-08, 21.363289, 2.6618824, 21.951855)
+
+[editable path="Warehouse_taavi"]
