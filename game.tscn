@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp1ssc7axru8s"]
+[gd_scene load_steps=10 format=3 uid="uid://dp1ssc7axru8s"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://b61k0i5ssm222" path="res://sun_beams/sun_beam_areas.tscn" id="2_e2o6t"]
@@ -23,6 +23,12 @@ fog_height_density = 0.15
 height = 0.9926758
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_feb5d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_feb5d"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="game" type="Node3D"]
 
@@ -52,3 +58,12 @@ debug_color = Color(0.78431374, 0.41960785, 1, 1)
 
 [node name="Test mesh for viewing" type="CSGMesh3D" parent="sun_beam_area"]
 mesh = SubResource("CylinderMesh_feb5d")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_feb5d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_fc0e3")

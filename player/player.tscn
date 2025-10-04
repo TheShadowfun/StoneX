@@ -17,6 +17,10 @@ debug_color = Color(0, 0.59801656, 0.71320117, 0.41960785)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4883568, 0)
 
+[node name="GrabRay" type="RayCast3D" parent="Camera3D"]
+
+[node name="HoldPosition" type="Node3D" parent="Camera3D"]
+
 [node name="Reticle" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
