@@ -128,8 +128,8 @@ func move_held_object(_delta):
 # camera movement
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		rotation_degrees.y -= event.relative.x  * 0.5
-		camera.rotation_degrees.x -= event.relative.y * 0.5
+		rotation_degrees.y -= event.relative.x  * 0.2
+		camera.rotation_degrees.x -= event.relative.y * 0.2
 		camera.rotation_degrees.x = clamp(
 			camera.rotation_degrees.x, -60.0, 80.0
 		)
@@ -165,7 +165,7 @@ func detect_interactables():
 				target.start_glowing()
 		
 func _physics_process(delta):
-	const SPEED = 5.5
+	const SPEED = 3.5
 	
 	var input_direction_2D = Input.get_vector(
 		"move_left", "move_right", "move_forward", "move_back"

@@ -52,7 +52,7 @@ func start_glowing() -> void:
 	if not _is_glowing:
 		_is_glowing = true
 		_time = 0.0
-		timer.start(2)  # Auto-stop glowing after 3 seconds
+		timer.start(2.3)  # Auto-stop glowing after 2.3 seconds
 		timer.connect("timeout", Callable(self, "stop_glowing"), CONNECT_ONE_SHOT)
 
 func stop_glowing() -> void:
