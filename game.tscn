@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp1ssc7axru8s"]
+[gd_scene load_steps=12 format=3 uid="uid://dp1ssc7axru8s"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://b61k0i5ssm222" path="res://sun_beams/sun_beam_areas.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cnlvka2mkfccu" path="res://battery_hud/battery_level_hud.tscn" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://c3up7ayl1aj6d" path="res://add_to_movable_group.gd" id="4_fc0e3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
 albedo_color = Color(0.9740191, 0.6062529, 0, 1)
@@ -29,6 +30,9 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fc0e3"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fc0e3"]
+albedo_color = Color(0.76862746, 1, 1, 1)
 
 [node name="game" type="Node3D"]
 
@@ -63,9 +67,11 @@ mesh = SubResource("CylinderMesh_feb5d")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+script = ExtResource("4_fc0e3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_feb5d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_fc0e3")
+surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
