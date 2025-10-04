@@ -4,8 +4,8 @@ extends CharacterBody3D
 @onready var grab_ray: RayCast3D = $Camera3D/GrabRay
 @onready var hold_position: Node3D = $Camera3D/HoldPosition
 
-var rotating: bool = false
-var previous_mouse_position: Vector2
+# Track previous camera transform for rotation calculations
+var previous_camera_transform: Transform3D
 
 @export var rotation_speed_degrees: float = 90.0 #degrees per second
 
@@ -34,6 +34,9 @@ func _ready():
 	grab_ray.enabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
+	
+	# Initialize previous camera transform
+	previous_camera_transform = camera.global_transform
 
 func _input(event):
 	if held_object and event is InputEventMouseButton:
@@ -42,7 +45,7 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			hold_distance = clamp(hold_distance + scroll_sensitivity, hold_distance_min, hold_distance_max)
 
-	# rotation
+# rotation
 func rotate_held_object(_delta):
 	if not held_object:
 		return
@@ -51,14 +54,19 @@ func rotate_held_object(_delta):
 	
 	if Input.is_action_pressed("rotate_left"):
 		rotation.y += 1
+		
 	if Input.is_action_pressed("rotate_right"):
 		rotation.y -= 1
+		
 	if Input.is_action_pressed("rotate_up"):
 		rotation.x += 1
+
 	if Input.is_action_pressed("rotate_down"):
 		rotation.x -= 1
+
 	if Input.is_action_pressed("rotate_roll_left"):
 		rotation.z += 1
+
 	if Input.is_action_pressed("rotate_roll_right"):
 		rotation.z -= 1
 	
@@ -67,14 +75,32 @@ func rotate_held_object(_delta):
 		var rotation_speed = deg_to_rad(rotation_speed_degrees)
 		var rotation_radians = rotation * rotation_speed * _delta
 		
-		var basis = held_object.global_transform.basis
-		basis = basis.rotated(Vector3.RIGHT, rotation_radians.x)
-		basis = basis.rotated(Vector3.UP, rotation_radians.y)
-		basis = basis.rotated(Vector3.BACK, rotation_radians.z)
-		held_object.global_transform.basis = basis.orthonormalized()
+		var camera_basis = camera.global_transform.basis
+		
+		# Create rotation matrices around camera axes
+		var object_basis = held_object.global_transform.basis
+		 
+		if rotation_radians.x != 0:
+			object_basis = object_basis.rotated(camera_basis.x, rotation_radians.x)
+		if rotation_radians.y != 0:
+			object_basis = object_basis.rotated(camera_basis.y, rotation_radians.y)
+		if rotation_radians.z != 0:
+			object_basis = object_basis.rotated(camera_basis.z, rotation_radians.z)
+			
+		held_object.global_transform.basis = object_basis.orthonormalized()
+
+# Apply camera rotation to held object to maintain relative orientation
+func apply_camera_rotation_to_held_object():
+	# Calculate the rotation change between the previous and current camera transform
+	var prev_basis = previous_camera_transform.basis
+	var current_basis = camera.global_transform.basis
+	# Create a transformation that represents the camera's rotation change
+	var rotation_change = prev_basis.inverse() * current_basis
+	# Apply this rotation to the held object to maintain its orientation relative to camera
+	held_object.global_transform.basis = rotation_change * held_object.global_transform.basis
 
 func update_hold_position():
-# Always position hold point in front of camera
+	# Always position hold point in front of camera
 	var forward = -camera.global_transform.basis.z
 	hold_position.global_transform.origin = camera.global_transform.origin + forward * hold_distance
 
@@ -108,6 +134,7 @@ func _unhandled_input(event):
 		camera.rotation_degrees.x = clamp(
 			camera.rotation_degrees.x, -60.0, 80.0
 		)
+		
 	elif event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -116,7 +143,6 @@ func modify_sun_level(change):
 	_sun_level = clamp(_sun_level + change, _sun_level_min, _sun_level_max)
 	emit_signal("sun_level_changed", _sun_level)
 	
-
 func _physics_process(delta):
 	const SPEED = 5.5
 	
@@ -133,16 +159,19 @@ func _physics_process(delta):
 	
 	velocity.y -= 20.0 * delta
 	
-		# magnet grabbing
+	# magnet grabbing
 	update_hold_position()
+		
 	if Input.is_action_just_pressed("gravity_grab"):
 		if held_object:
 			release_object()
 		else:
 			try_grab_object()
+			
 	if held_object:
 		move_held_object(delta)
 		rotate_held_object(delta)
+		apply_camera_rotation_to_held_object()
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = 10
@@ -158,3 +187,6 @@ func _physics_process(delta):
 	if not in_sunlight:
 		var sun_this_frame = sun_decay_per_second * delta
 		modify_sun_level(sun_this_frame)
+	
+	# Store the current camera transform for the next frame
+	previous_camera_transform = camera.global_transform
