@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=39 format=3 uid="uid://m6kkharqhi5t"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cadqmi1p38m5" path="res://World/Blends/Warehouse_taavi.blend" id="11_ts1ha"]
 [ext_resource type="PackedScene" uid="uid://buiitouvt7lgh" path="res://World/assets glb/small_tube1.glb" id="12_clck5"]
 [ext_resource type="ArrayMesh" uid="uid://b5ml4o71w6p2" path="res://World/assets obj/boxes1.obj" id="13_2idi0"]
-[ext_resource type="PackedScene" uid="uid://dkt51ylhlksy" path="res://warehouse_taavi.tscn" id="13_lcnlk"]
 [ext_resource type="ArrayMesh" uid="uid://ctxwky6rrwsyr" path="res://World/assets obj/boxes3.obj" id="14_11wgs"]
 [ext_resource type="Texture2D" uid="uid://ch4xd1oo3ivi4" path="res://World/assets glb/textures/box1_Cardboard001_1K-JPG_Color.jpg" id="14_lcnlk"]
 [ext_resource type="Texture2D" uid="uid://ci58mo7q3gqxl" path="res://World/assets glb/box3_Cardboard001_1K-JPG_Color.jpg" id="15_asde0"]
@@ -133,10 +132,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_asde0")
 
 [node name="Warehouse_taavi" parent="." instance=ExtResource("11_ts1ha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.592638, 2.2458177, 8.729292)
-visible = false
-
-[node name="Warehouse_taavi2" parent="." instance=ExtResource("13_lcnlk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.420086, 2.4962444, 8.851814)
 
 [node name="rubble3" parent="." instance=ExtResource("6_2idi0")]
 transform = Transform3D(-0.51489466, 0, 1.9791182, 0, 2.045, 0, -1.9791182, 0, -0.51489466, 20.59586, -0.4076749, 11.655128)
@@ -201,14 +196,14 @@ shape = SubResource("BoxShape3D_6r2q7")
 mesh = ExtResource("21_3df6v")
 surface_material_override/0 = SubResource("StandardMaterial3D_n4rbb")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="rubble_part1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.6846871, 0, -0.7288372, 0, 1, 0, 0.7288372, 0, 0.6846871, 13.143593, 0, 8.253976)
 script = ExtResource("7_evxwe")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rubble_part1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22205228, -0.018205643, -0.3703909)
 shape = SubResource("BoxShape3D_yp3us")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="rubble_part1"]
 mesh = ExtResource("23_6r2q7")
 surface_material_override/0 = SubResource("StandardMaterial3D_qx7ok")
