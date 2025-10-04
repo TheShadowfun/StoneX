@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
+[ext_resource type="Environment" uid="uid://r0rlkckslk7n" path="res://testtestlevel1.tres" id="4_yp3us"]
 [ext_resource type="PackedScene" uid="uid://clwr1bfuxuchf" path="res://World/assets glb/cardboard_1.glb" id="5_evxwe"]
 [ext_resource type="PackedScene" uid="uid://ban4a5fgovf5j" path="res://World/assets glb/rubble2.glb" id="6_2idi0"]
 [ext_resource type="Script" uid="uid://c3up7ayl1aj6d" path="res://add_to_movable_group.gd" id="7_evxwe"]
@@ -26,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dw6j1pdm31pes" path="res://World/assets glb/rubble1_Concrete035_1K-JPG_Color.jpg" id="24_n4rbb"]
 [ext_resource type="PackedScene" uid="uid://cr7pfsd65fcha" path="res://World/assets glb/Big_pipe_2.glb" id="24_yp3us"]
 
+<<<<<<< Updated upstream
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lcnlk"]
 panorama = ExtResource("5_2idi0")
 
@@ -61,6 +63,8 @@ adjustment_enabled = true
 adjustment_contrast = 1.09
 adjustment_saturation = 1.1
 
+=======
+>>>>>>> Stashed changes
 [sub_resource type="BoxShape3D" id="BoxShape3D_lcnlk"]
 size = Vector3(1.5212402, 1, 1)
 
@@ -116,6 +120,7 @@ transform = Transform3D(0.4063221, 0, 0.9137299, 0, 1, 0, -0.9137299, 0, 0.40632
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 24, 0)
+visible = false
 light_color = Color(0.7635822, 0.78893894, 0.8821072, 1)
 shadow_bias = 1.852
 shadow_normal_bias = 0.0
@@ -123,9 +128,6 @@ shadow_reverse_cull_face = true
 shadow_transmittance_bias = 2.029
 shadow_opacity = 0.85
 shadow_blur = 0.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ct5qx")
 
 [node name="rubble2" parent="." instance=ExtResource("6_2idi0")]
 transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 23.379955, -0.15046906, 12.296041)
@@ -159,6 +161,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_asde0")
 
 [node name="Warehouse_taavi" parent="." instance=ExtResource("11_ts1ha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.592638, 2.2458177, 8.729292)
+
+[node name="Plane_008" parent="Warehouse_taavi" index="13"]
+layers = 5
 
 [node name="rubble3" parent="." instance=ExtResource("6_2idi0")]
 transform = Transform3D(-0.51489466, 0, 1.9791182, 0, 2.045, 0, -1.9791182, 0, -0.51489466, 20.59586, -0.4076749, 11.655128)
@@ -241,5 +246,8 @@ transform = Transform3D(6.794811e-08, 0.9, -3.934025e-08, 0, -3.934025e-08, -0.9
 
 [node name="big_pipe" parent="." instance=ExtResource("12_evxwe")]
 transform = Transform3D(-1.3113416e-08, 0, -0.29999998, 0, 0.29999998, 0, 0.29999998, 0, -1.3113416e-08, 21.363289, 2.6618824, 21.951855)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_yp3us")
 
 [editable path="Warehouse_taavi"]
