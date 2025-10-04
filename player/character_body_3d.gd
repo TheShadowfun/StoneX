@@ -133,10 +133,7 @@ func _unhandled_input(event):
 		camera.rotation_degrees.x = clamp(
 			camera.rotation_degrees.x, -60.0, 80.0
 		)
-		
-	elif event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
+	
 #Should usually take a positive argument, but can also take neg
 func modify_sun_level(change):
 	_sun_level = clamp(_sun_level + change, _sun_level_min, _sun_level_max)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=21 format=3 uid="uid://m6kkharqhi5t"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cadqmi1p38m5" path="res://World/Blends/Warehouse_taavi.blend" id="11_ts1ha"]
 [ext_resource type="PackedScene" uid="uid://buiitouvt7lgh" path="res://World/assets glb/small_tube1.glb" id="12_clck5"]
 [ext_resource type="ArrayMesh" uid="uid://b5ml4o71w6p2" path="res://World/assets obj/boxes1.obj" id="13_2idi0"]
+[ext_resource type="PackedScene" uid="uid://cn4sis57vp3si" path="res://scenes/sample_game.tscn" id="13_lcnlk"]
 [ext_resource type="Texture2D" uid="uid://ch4xd1oo3ivi4" path="res://World/assets glb/textures/box1_Cardboard001_1K-JPG_Color.jpg" id="14_lcnlk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lcnlk"]
@@ -60,9 +61,10 @@ size = Vector3(2.0058594, 1, 4.533203)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asde0"]
 albedo_texture = ExtResource("11_evxwe")
 
-[node name="testtestlevel" type="Node3D"]
+[node name="TestLevel" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.668663, 0, 5.5449085)
 
 [node name="rubble1" parent="." instance=ExtResource("3_k0hlf")]
@@ -126,3 +128,6 @@ light_size = 0.24
 light_specular = 8.247
 shadow_enabled = true
 spot_range = 16.788752
+
+[node name="SampleGame" parent="." instance=ExtResource("13_lcnlk")]
+position = Vector2(885, 491)

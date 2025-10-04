@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci6y5mjr053vx"]
+
+[ext_resource type="PackedScene" uid="uid://cadqmi1p38m5" path="res://World/Blends/Warehouse_taavi.blend" id="1_ujty7"]
+
+[node name="Warehouse_taavi" instance=ExtResource("1_ujty7")]
