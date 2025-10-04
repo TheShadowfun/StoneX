@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b61k0i5ssm222"]
+
+[ext_resource type="Script" uid="uid://ex2qhsl4m4w8" path="res://sun_beams/sun_beam_interaction.gd" id="1_7f7mw"]
+
+[node name="sun_beam_area" type="Area3D"]
+script = ExtResource("1_7f7mw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
