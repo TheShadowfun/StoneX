@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cn4sis57vp3si"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_clim0"]
-[ext_resource type="Script" path="res://scripts/sample_game.gd" id="1_omkqs"]
+[ext_resource type="Script" uid="uid://cpxscopquw2nf" path="res://scripts/player.gd" id="1_clim0"]
+[ext_resource type="Script" uid="uid://mwpywtl46g2w" path="res://scripts/sample_game.gd" id="1_omkqs"]
 [ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="2_nwagm"]
 [ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="4_y4cq8"]
 
@@ -12,6 +12,7 @@ size = Vector2(32, 32)
 script = ExtResource("1_omkqs")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -192.0
 offset_top = -200.0
 offset_right = 1408.0
@@ -84,6 +85,7 @@ text = "Main Menu
 [node name="Settings" parent="CanvasLayer/Panel" node_paths=PackedStringArray("pre_scene") instance=ExtResource("4_y4cq8")]
 visible = false
 layout_mode = 1
+current_tab = 0
 pre_scene = NodePath("../../..")
 
 [connection signal="pressed" from="CanvasLayer/Panel/PauseMenu/Resume" to="." method="_on_resume_pressed"]

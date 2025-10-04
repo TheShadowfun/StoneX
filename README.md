@@ -8,9 +8,9 @@ Features:
 
 - A basic start menu with Play, Options, and Quit buttons.
 - A basic options menu with three tabs:
-    - Video tab: Fullscreen, Borderless, Vsync
-    - Music tab: Master, Music, Sound Effects
-    - Control tab: Up, Down, Left, Right
+	- Video tab: Fullscreen, Borderless, Vsync
+	- Music tab: Master, Music, Sound Effects
+	- Control tab: Up, Down, Left, Right
 - A sample control testing scene (Press the Play button in the start menu)
 - An auto-loaded Scene Manager
 - Persistence (Not available in the web build)

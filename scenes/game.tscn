@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp1ssc7axru8s"]
+
+[ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://scenes/player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://b61k0i5ssm222" path="res://scenes/sun_beam_areas.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://cnlvka2mkfccu" path="res://scenes/battery_level_hud.tscn" id="2_feb5d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80nbo"]
+albedo_color = Color(0.9740191, 0.6062529, 0, 1)
+
+[sub_resource type="Environment" id="Environment_e2o6t"]
+background_mode = 1
+background_color = Color(0.8483303, 0.6740673, 0.8900347, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6474187, 0.7054953, 0.5679998, 1)
+tonemap_mode = 2
+tonemap_white = 0.78
+fog_enabled = true
+fog_light_color = Color(0.14501488, 0.52470696, 0.8898769, 1)
+fog_height = 0.5
+fog_height_density = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_e2o6t"]
+height = 0.9926758
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_feb5d"]
+
+[node name="game" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0098257065, -11, -0.000111579895)
+use_collision = true
+size = Vector3(19, 22, 19)
+material = SubResource("StandardMaterial3D_80nbo")
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+unique_name_in_owner = true
+script = null
+
+[node name="BatteryLevel HUD" parent="Player" instance=ExtResource("2_feb5d")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 5, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e2o6t")
+
+[node name="sun_beam_area" parent="." instance=ExtResource("2_e2o6t")]
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sun_beam_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_e2o6t")
+debug_color = Color(0.78431374, 0.41960785, 1, 1)
+
+[node name="Test mesh for viewing" type="CSGMesh3D" parent="sun_beam_area"]
+mesh = SubResource("CylinderMesh_feb5d")

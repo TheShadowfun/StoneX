@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dc388hkklqvvc"]
 
 [ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="1_0ajpt"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_tievw"]
+[ext_resource type="Script" uid="uid://bgay08n6pdmpg" path="res://scripts/main_menu.gd" id="1_tievw"]
 [ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="3_dt7l5"]
 
 [node name="MainMenu" type="Node2D"]
@@ -85,6 +85,7 @@ text = "Quit
 
 [node name="Settings" parent="UI" node_paths=PackedStringArray("pre_scene") instance=ExtResource("3_dt7l5")]
 visible = false
+current_tab = 0
 pre_scene = NodePath("../MainMenu")
 
 [connection signal="pressed" from="UI/MainMenu/VBoxContainer/Start" to="UI/MainMenu" method="_on_start_pressed"]
