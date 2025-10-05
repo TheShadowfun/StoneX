@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc388hkklqvvc"]
+[gd_scene load_steps=5 format=3 uid="uid://dc388hkklqvvc"]
 
 [ext_resource type="Theme" uid="uid://cb2tqos08yhkd" path="res://assets/MinimalUI/MinimalUI.tres" id="1_0ajpt"]
 [ext_resource type="Script" uid="uid://bgay08n6pdmpg" path="res://scripts/main_menu.gd" id="1_tievw"]
+[ext_resource type="VideoStream" uid="uid://dddnlgg03ed7l" path="res://assets/Video_start.ogv" id="2_wu84c"]
 [ext_resource type="PackedScene" uid="uid://603k3vy4p3f1" path="res://scenes/settings.tscn" id="3_dt7l5"]
 
 [node name="MainMenu" type="Node2D"]
@@ -17,7 +18,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tievw")
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="UI/MainMenu"]
+layout_mode = 0
+offset_right = 1923.0
+offset_bottom = 1071.0
+stream = ExtResource("2_wu84c")
+autoplay = true
+loop = true
+
 [node name="ColorRect" type="ColorRect" parent="UI/MainMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,8 +56,11 @@ layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("1_0ajpt")
 theme_override_font_sizes/font_size = 50
-text = "Simple Template: Main Menu
+text = "SolarLink
+
+Main Menu
 "
+horizontal_alignment = 1
 
 [node name="Start" type="Button" parent="UI/MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(100, 32)
@@ -83,10 +96,8 @@ theme_override_font_sizes/font_size = 24
 text = "Quit
 "
 
-[node name="Settings" parent="UI" node_paths=PackedStringArray("pre_scene") instance=ExtResource("3_dt7l5")]
+[node name="Settings" parent="UI" instance=ExtResource("3_dt7l5")]
 visible = false
-current_tab = 0
-pre_scene = NodePath("../MainMenu")
 
 [connection signal="pressed" from="UI/MainMenu/VBoxContainer/Start" to="UI/MainMenu" method="_on_start_pressed"]
 [connection signal="pressed" from="UI/MainMenu/VBoxContainer/Option" to="UI/MainMenu" method="_on_option_pressed"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=54 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=57 format=3 uid="uid://m6kkharqhi5t"]
 
+[ext_resource type="PackedScene" uid="uid://ingmkrcxbr42" path="res://World/assets glb/door_upper.glb" id="1_2741v"]
 [ext_resource type="PackedScene" uid="uid://cn4sis57vp3si" path="res://scenes/sample_game.tscn" id="1_qx7ok"]
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
@@ -36,7 +37,13 @@
 [ext_resource type="Script" uid="uid://ds5at45pt1bm2" path="res://add_to_button_group_door.gd" id="34_0cldx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k31oh"]
-size = Vector3(2.5935059, 2.8793945, 1.1955566)
+size = Vector3(2.5112228, 2.3828735, 3.5784998)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0cldx"]
+height = 0.8516846
+radius = 0.8701172
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2741v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lcnlk"]
 size = Vector3(1.5212402, 1, 1)
@@ -96,27 +103,55 @@ radius = 1.4526367
 
 [node name="testtestlevel" type="Node3D"]
 
+[node name="door_upper" parent="." instance=ExtResource("1_2741v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.582636, 2.4771037, 8.723134)
+script = ExtResource("34_0cldx")
+
+[node name="sun_beam_area5" parent="." instance=ExtResource("31_dtkss")]
+transform = Transform3D(1, 0, -1.1920929e-07, 0, 3.034136, 0, 1.1920929e-07, 0, 1, -28.392763, 7.501171, 6.0570793)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sun_beam_area5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0858364, 0.7055023, 2.442431)
+shape = SubResource("BoxShape3D_k31oh")
+
+[node name="sun_beam_area4" parent="." instance=ExtResource("31_dtkss")]
+transform = Transform3D(1, 0, -1.1920929e-07, 0, 3.0341358, 0, 1.1920929e-07, 0, 1, 29.317905, 0, -4.3274627)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sun_beam_area4"]
+transform = Transform3D(0.40621042, 0, 0.91377956, 0, 1, 0, -0.91377956, 0, 0.40621042, -0.21345901, 0.3241577, 0.5970967)
+shape = SubResource("CylinderShape3D_0cldx")
+
+[node name="sun_beam_area3" parent="." instance=ExtResource("31_dtkss")]
+transform = Transform3D(1, 0, -5.9604645e-08, 0, 1.7418771, 0, 5.9604645e-08, 0, 1, 0.9995773, 0, 20.822588)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sun_beam_area3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1633625, 0.31631136, 1.2286777)
+shape = SubResource("BoxShape3D_k31oh")
+
 [node name="door_lever" parent="." instance=ExtResource("33_0cldx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.610197, 2.2804759, 8.874834)
 script = ExtResource("34_0cldx")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.35242027, 0, 0, 0, 1, -2.0569477, 8.252178, 9.106511)
-size = Vector3(0.50439453, 1, 0.44384766)
+[node name="CSGBox3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.35242027, 0, 0, 0, 1, 0.8412173, 8.350526, 12.202164)
 script = ExtResource("28_ikbnk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1151638, 0)
+shape = SubResource("BoxShape3D_2741v")
 
 [node name="sun_beam_area2" parent="." instance=ExtResource("31_dtkss")]
 transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 53.269333, 0, 11.366)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sun_beam_area2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.012215, 5.9613237, 11.6398)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.642948, 5.9613237, 12.31951)
 shape = SubResource("BoxShape3D_k31oh")
 
 [node name="SampleGame" parent="." instance=ExtResource("1_qx7ok")]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.6680399, 8.822171, 6.6637926)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 34.94495, 0.6332593, 5.6444006)
 
 [node name="BatteryLevel HUD" parent="Player" instance=ExtResource("3_k31oh")]
 
@@ -124,7 +159,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.66
 transform = Transform3D(-1.0824581, 0, 1.717319, 0, 2.0299997, 0, -1.717319, 0, -1.0824581, 8.124409, -0.38230813, 4.367488)
 
 [node name="cardboard_1" parent="." instance=ExtResource("5_evxwe")]
-transform = Transform3D(0.4063221, 0, 0.9137299, 0, 1, 0, -0.9137299, 0, 0.4063221, 14.782529, 0.12336314, 18.399443)
+transform = Transform3D(0.4063221, 0, 0.9137299, 0, 1, 0, -0.9137299, 0, 0.4063221, 14.782529, -0.107827544, 18.399443)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 24, 0)
@@ -211,7 +246,7 @@ mesh = ExtResource("18_0vgmq")
 surface_material_override/0 = SubResource("StandardMaterial3D_yp3us")
 
 [node name="cardboard_2" parent="." instance=ExtResource("19_ct5qx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4151936, 0.20243019, 19.908764)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4151936, -0.1892249, 16.20929)
 
 [node name="cardboard_2" parent="cardboard_2" instance=ExtResource("19_ct5qx")]
 transform = Transform3D(-0.64124876, 0, -0.76733315, 0, 1, 0, 0.76733315, 0, -0.64124876, 23.267727, 0.20243019, 2.0140228)
@@ -247,7 +282,7 @@ mesh = ExtResource("23_6r2q7")
 surface_material_override/0 = SubResource("StandardMaterial3D_qx7ok")
 
 [node name="Warehouse_taavi" parent="." instance=ExtResource("23_r7ej7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.593, 2.246, 8.729)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.614452, 2.267515, 8.727333)
 
 [node name="big_pipe" parent="." instance=ExtResource("26_qx7ok")]
 transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 21.344872, 2.184549, 22.472578)

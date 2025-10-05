@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://gck77unp7j6h"]
+[gd_scene load_steps=13 format=3 uid="uid://gck77unp7j6h"]
 
 [ext_resource type="Script" uid="uid://bm6jq16j2612j" path="res://player/character_body_3d.gd" id="1_iwpo4"]
 [ext_resource type="Texture2D" uid="uid://r2k5n01q85ay" path="res://player/reticle.png" id="2_fb3t6"]
+[ext_resource type="PackedScene" uid="uid://dj87yp1qag8uh" path="res://World/assets glb/hand.glb" id="2_yw30f"]
 [ext_resource type="AudioStream" uid="uid://uuogx8l8bp54" path="res://Beep Beep Sound Effect.mp3" id="3_g1dw6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fb3t6"]
@@ -60,10 +61,52 @@ tracks/1/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_qjkh3"]
+resource_name = "ending"
+length = 30.0
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yw30f"]
 _data = {
 &"RESET": SubResource("Animation_yw30f"),
+&"ending": SubResource("Animation_qjkh3"),
 &"fade_to_black": SubResource("Animation_g1dw6")
+}
+
+[sub_resource type="Animation" id="Animation_g6k8r"]
+resource_name = "ending"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 26.52299),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_boad6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_boad6"]
+_data = {
+&"RESET": SubResource("Animation_boad6"),
+&"ending": SubResource("Animation_g6k8r")
 }
 
 [node name="Player" type="CharacterBody3D"]
@@ -82,16 +125,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4883568, 0)
 
 [node name="HoldPosition" type="Node3D" parent="Camera3D"]
 
+[node name="hand" parent="Camera3D" instance=ExtResource("2_yw30f")]
+transform = Transform3D(0.08429103, -0.22839563, -0.027485758, 0.22348681, 0.08824101, -0.047876596, 0.054531325, -0.008600562, 0.23869932, 0.36207554, -0.22053933, -0.27265626)
+
+[node name="hand2" parent="Camera3D" instance=ExtResource("2_yw30f")]
+transform = Transform3D(-0.12541856, -0.2082134, -0.030697918, 0.20114668, -0.10806914, -0.08880356, 0.061928958, -0.07066285, 0.22626658, -0.45194215, -0.27870905, -0.26211113)
+
 [node name="Reticle" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -51.0
-offset_top = -51.0
-offset_right = 51.0
-offset_bottom = 51.0
+offset_left = -53.0
+offset_top = -13.0
+offset_right = 55.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_fb3t6")
@@ -119,5 +168,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_yw30f")
 }
 speed_scale = 0.247
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Endplayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect2"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_boad6")
+}
 
 [connection signal="animation_finished" from="CanvasLayer/ColorRect/FadePlayer" to="." method="_on_fade_player_animation_finished"]

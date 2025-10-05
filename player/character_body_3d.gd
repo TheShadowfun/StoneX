@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var hold_position: Node3D = $Camera3D/HoldPosition
 @onready var low_sun_beep_player = %LowSunBeepPlayer
 @onready var fade_player = %FadePlayer
+@onready var end_player = %Endplayer
 
 # Track previous camera transform for rotation calculations
 var previous_camera_transform: Transform3D
@@ -181,8 +182,9 @@ func detect_interactables():
 	grab_ray.force_raycast_update()
 	if grab_ray.is_colliding():
 		var target = grab_ray.get_collider()
-		if target.is_in_group("button") and Input.is_action_just_pressed("ui_accept"):
-			emit_signal("button_pressed")
+		if target.is_in_group("button") and Input.is_action_pressed("interact"):
+			button_pressed.emit()
+			end_player.play("ending")
 			return
 		
 		if target.is_in_group("movable"):
