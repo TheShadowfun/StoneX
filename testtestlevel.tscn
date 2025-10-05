@@ -1,8 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=48 format=3 uid="uid://m6kkharqhi5t"]
 
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
-[ext_resource type="Environment" uid="uid://bty4omykq2koq" path="res://WorldShaders.tres" id="4_6r2q7"]
+[ext_resource type="Environment" uid="uid://cl8f5ge124t5v" path="res://WorldShaders.tres" id="4_6r2q7"]
 [ext_resource type="PackedScene" uid="uid://clwr1bfuxuchf" path="res://World/assets glb/cardboard_1.glb" id="5_evxwe"]
 [ext_resource type="PackedScene" uid="uid://ban4a5fgovf5j" path="res://World/assets glb/rubble2.glb" id="6_2idi0"]
 [ext_resource type="Script" uid="uid://c3up7ayl1aj6d" path="res://add_to_movable_group.gd" id="7_evxwe"]
@@ -25,7 +25,10 @@
 [ext_resource type="PackedScene" uid="uid://dkt51ylhlksy" path="res://warehouse_taavi.tscn" id="23_r7ej7"]
 [ext_resource type="Texture2D" uid="uid://dw6j1pdm31pes" path="res://World/assets glb/rubble1_Concrete035_1K-JPG_Color.jpg" id="24_n4rbb"]
 [ext_resource type="PackedScene" uid="uid://dch6lk2wsixkx" path="res://World/assets glb/big_pipe.glb" id="26_qx7ok"]
-[ext_resource type="PlaneMesh" path="res://World/assets glb/new_plane_mesh.tres" id="27_qx7ok"]
+[ext_resource type="ArrayMesh" uid="uid://br3lm4g8ojrrx" path="res://World/assets obj/RUBBLE_PART3.obj" id="27_6nvms"]
+[ext_resource type="PlaneMesh" uid="uid://lby8pou1awln" path="res://World/assets glb/new_plane_mesh.tres" id="27_qx7ok"]
+[ext_resource type="Texture2D" uid="uid://oere36t1vp6s" path="res://World/assets glb/rubble2_Concrete035_1K-JPG_Color.jpg" id="28_28ecm"]
+[ext_resource type="ArrayMesh" uid="uid://bfqq628q3tpri" path="res://World/assets obj/RUBBLE_BIG.obj" id="29_28ecm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lcnlk"]
 size = Vector3(1.5212402, 1, 1)
@@ -73,13 +76,25 @@ albedo_texture = ExtResource("24_n4rbb")
 albedo_color = Color(0.01173987, 0.048211206, 0.15217325, 0.6745098)
 refraction_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ja6s5"]
+size = Vector3(1.4130859, 0.24414063, 6.2072754)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k31oh"]
+albedo_texture = ExtResource("28_28ecm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qx7ok"]
+size = Vector3(1.4951172, 3.8925781, 3.1308594)
+
 [node name="testtestlevel" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26.960423, 0, 2.6330047)
 
+[node name="Warehouse_taavi" parent="." instance=ExtResource("23_r7ej7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.593, 2.246, 8.729)
+
 [node name="rubble1" parent="." instance=ExtResource("3_k0hlf")]
-transform = Transform3D(-2.0240877, 0, -0.15482092, 0, 2.0299995, 0, 0.15482092, 0, -2.0240877, 1.6025591, -0.38230813, 4.367488)
+transform = Transform3D(-1.8831905, 0, 0.75795436, 0, 2.03, 0, -0.75795436, 0, -1.8831905, 8.310159, -0.38230813, 4.2602735)
 
 [node name="cardboard_1" parent="." instance=ExtResource("5_evxwe")]
 transform = Transform3D(0.4063221, 0, 0.9137299, 0, 1, 0, -0.9137299, 0, 0.4063221, 14.782529, 0.12336314, 18.399443)
@@ -100,13 +115,13 @@ process_mode = 1
 environment = ExtResource("4_6r2q7")
 
 [node name="rubble2" parent="." instance=ExtResource("6_2idi0")]
-transform = Transform3D(2.07, 0, 0, 0, 2.07, 0, 0, 0, 2.07, 20.537937, 0.11243129, 12.296041)
+transform = Transform3D(1.0011219, 0, 1.8118098, 0, 2.07, 0, -1.8118098, 0, 1.0011219, 19.638203, 0.11243129, 18.660135)
 
 [node name="small_tube12" parent="." instance=ExtResource("12_clck5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9170132, 0.62007, 10.831703)
 
 [node name="box1" type="RigidBody3D" parent="."]
-transform = Transform3D(0.89297897, 0, 0.45009845, 0, 1, 0, -0.45009845, 0, 0.89297897, 4.8272734, 0.13039815, 18.388865)
+transform = Transform3D(0.89297897, 0, 0.45009845, 0, 1, 0, -0.45009845, 0, 0.89297897, 13.282816, 0.13039815, -4.052082)
 script = ExtResource("7_evxwe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="box1"]
@@ -193,7 +208,7 @@ mesh = ExtResource("21_3df6v")
 surface_material_override/0 = SubResource("StandardMaterial3D_n4rbb")
 
 [node name="rubble_part1" type="RigidBody3D" parent="."]
-transform = Transform3D(0.6846871, 0, -0.7288372, 0, 1, 0, 0.7288372, 0, 0.6846871, 13.143593, 0, 8.253976)
+transform = Transform3D(0.07927689, 0, -0.99685264, 0, 1, 0, 0.99685264, 0, 0.07927689, 23.166222, -0.1704852, 10.6629925)
 script = ExtResource("7_evxwe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="rubble_part1"]
@@ -204,9 +219,6 @@ shape = SubResource("BoxShape3D_yp3us")
 mesh = ExtResource("23_6r2q7")
 surface_material_override/0 = SubResource("StandardMaterial3D_qx7ok")
 
-[node name="Warehouse_taavi" parent="." instance=ExtResource("23_r7ej7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.593, 2.246, 8.729)
-
 [node name="big_pipe" parent="." instance=ExtResource("26_qx7ok")]
 transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 21.344872, 2.184549, 22.472578)
 
@@ -214,3 +226,32 @@ transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-
 transform = Transform3D(13.147306, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 14.679995, 8.858651, 23.56941)
 material_override = SubResource("StandardMaterial3D_6nvms")
 mesh = ExtResource("27_qx7ok")
+
+[node name="rubble_part3" type="RigidBody3D" parent="."]
+transform = Transform3D(0.69060475, 0, 0.7232324, 0, 1, 0, -0.7232324, 0, 0.69060475, 12.696678, -0.2668116, -2.575541)
+script = ExtResource("7_evxwe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rubble_part3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1880331, 0.15965432, 0.06870079)
+shape = SubResource("BoxShape3D_ja6s5")
+
+[node name="RubblePart3" type="MeshInstance3D" parent="rubble_part3"]
+mesh = ExtResource("27_6nvms")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_k31oh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="RubbleBig" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(0.7066376, 0, -0.7075756, 0, 1, 0, 0.7075756, 0, 0.7066376, -0.11544299, -0.11061485, 3.6941724)
+mesh = ExtResource("29_28ecm")
+skeleton = NodePath("../..")
+
+[node name="RubbleBig" type="MeshInstance3D" parent="StaticBody3D/RubbleBig"]
+transform = Transform3D(0.72634673, 0, 0.6873283, 0, 1, 0, -0.6873283, 0, 0.72634673, 2.6837125, -0.11061485, -1.8449404)
+mesh = ExtResource("29_28ecm")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.84554577, 0, 1.8455577, 0, 2.0300364, 0, -1.8455577, 0, 0.84554577, 1.009655, 2.571674, 3.7155633)
+shape = SubResource("BoxShape3D_qx7ok")
