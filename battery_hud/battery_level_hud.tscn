@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnlvka2mkfccu"]
+[gd_scene load_steps=3 format=3 uid="uid://cnlvka2mkfccu"]
 
 [ext_resource type="Script" uid="uid://hc1hu7x41sv1" path="res://battery_hud/battery_level_hud.gd" id="1_sk8vp"]
+[ext_resource type="Texture2D" uid="uid://ccotq57y4y2s2" path="res://battery_hud/batery_ui.png" id="2_2e0c2"]
 
 [node name="BatteryLevel HUD" type="CanvasLayer"]
 script = ExtResource("1_sk8vp")
@@ -15,16 +16,21 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
+modulate = Color(0, 1, 0.12156863, 1)
 layout_mode = 0
-offset_left = 1687.0
-offset_top = 1017.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = 1648.0
+offset_top = 934.0
+offset_right = 1844.0
+offset_bottom = 1050.0
 max_value = 10.0
 value = 6.55
 show_percentage = false
 
+[node name="BateryUi" type="Sprite2D" parent="Control"]
+position = Vector2(1761, 991)
+scale = Vector2(0.36897582, 0.36897582)
+texture = ExtResource("2_2e0c2")
+
 [node name="Vahetage prog bar textured prog bar vastu" type="TextureProgressBar" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
