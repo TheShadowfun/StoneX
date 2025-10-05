@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://coudik3qdimm4"
+path="res://.godot/imported/SCICmpt_Retro Computer Glitches Sawtooth Chaotic_BOLT_ARP2600.wav-95696e4f796ecde7d2a3456172cc481a.sample"
+
+[deps]
+
+source_file="res://World/Sound/SCICmpt_Retro Computer Glitches Sawtooth Chaotic_BOLT_ARP2600.wav"
+dest_files=["res://.godot/imported/SCICmpt_Retro Computer Glitches Sawtooth Chaotic_BOLT_ARP2600.wav-95696e4f796ecde7d2a3456172cc481a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
