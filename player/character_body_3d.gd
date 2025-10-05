@@ -3,6 +3,8 @@ extends CharacterBody3D
 @onready var camera = %Camera3D
 @onready var grab_ray: RayCast3D = $Camera3D/GrabRay
 @onready var hold_position: Node3D = $Camera3D/HoldPosition
+@onready var low_sun_beep_player = %LowSunBeepPlayer
+@onready var fade_player = %FadePlayer
 
 # Track previous camera transform for rotation calculations
 var previous_camera_transform: Transform3D
@@ -33,6 +35,10 @@ var in_sunlight = false
 const sun_charge_per_sec= 1.0
 const sun_decay_per_second = -0.2
 
+var is_dead = false
+var return_to_initial = false
+var initial_position: Vector3
+
 signal sun_level_changed(new_level: float)
 signal button_pressed()
 
@@ -41,6 +47,8 @@ func _ready():
 	grab_ray.enabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	add_to_group("player")
+	
+	initial_position = global_transform.origin
 	
 	# Initialize previous camera transform
 	previous_camera_transform = camera.global_transform
@@ -139,6 +147,36 @@ func modify_sun_level(change):
 	_sun_level = clamp(_sun_level + change, _sun_level_min, _sun_level_max)
 	emit_signal("sun_level_changed", _sun_level)
 	
+	# Low sun level warning
+	if _sun_level < _sun_level_max * 0.15:
+		if !low_sun_beep_player.playing:
+			low_sun_beep_player.play()
+	else:
+		low_sun_beep_player.stop()
+
+	# Sun level at zero
+	if _sun_level <= 0 and not is_dead:
+		is_dead = true
+		fade_player.play("fade_to_black")
+
+
+func _on_fade_player_animation_finished(anim_name):
+	if anim_name == "fade_to_black":
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		fade_player.play("RESET")
+		low_sun_beep_player.stop()
+		# Reset player's position to where they started
+		# Reset velocity to stop any movement from before death
+		velocity = Vector3.ZERO
+		# Reset sun level
+		_sun_level = 5.0
+		return_to_initial = true
+		emit_signal("sun_level_changed", _sun_level)
+		# Reset the death state
+		is_dead = false
+	#	 Ensure the mouse is captured again for gameplay
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 func detect_interactables():
 	grab_ray.force_raycast_update()
 	if grab_ray.is_colliding():
@@ -204,6 +242,10 @@ func _physics_process(delta):
 	if not in_sunlight:
 		var sun_this_frame = sun_decay_per_second * delta
 		modify_sun_level(sun_this_frame)
+		
+	if return_to_initial:
+		global_transform.origin = initial_position
+		return_to_initial = false
 	
 	# Store the current camera transform for the next frame
 	previous_camera_transform = camera.global_transform
