@@ -17,6 +17,7 @@ func _input(event: InputEvent):
 		if not ui_layer.visible:
 			show_ui_layer()
 		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 			resume_game()
 
 func show_ui_layer():
@@ -40,7 +41,6 @@ func _on_resume_pressed():
 
 func _on_option_pressed():
 	settings.show()
-	settings.reset_focus()
 
 func _on_main_menu_pressed():
 	Utilities.switch_scene("MainMenu", self)

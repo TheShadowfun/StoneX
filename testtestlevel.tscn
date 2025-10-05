@@ -1,5 +1,6 @@
-[gd_scene load_steps=42 format=3 uid="uid://m6kkharqhi5t"]
+[gd_scene load_steps=43 format=3 uid="uid://m6kkharqhi5t"]
 
+[ext_resource type="PackedScene" uid="uid://cn4sis57vp3si" path="res://scenes/sample_game.tscn" id="1_qx7ok"]
 [ext_resource type="PackedScene" uid="uid://gck77unp7j6h" path="res://player/player.tscn" id="2_y3a61"]
 [ext_resource type="PackedScene" uid="uid://brte5caevirff" path="res://World/assets glb/rubble1.glb" id="3_k0hlf"]
 [ext_resource type="Environment" uid="uid://bty4omykq2koq" path="res://WorldShaders.tres" id="4_6r2q7"]
@@ -9,7 +10,6 @@
 [ext_resource type="ArrayMesh" uid="uid://ctqmk0mmtrtqg" path="res://World/assets obj/boxes2.obj" id="10_ts1ha"]
 [ext_resource type="Texture2D" uid="uid://u3b110rpbqth" path="res://World/assets glb/textures/box2_Cardboard003_1K-JPG_Color.jpg" id="11_evxwe"]
 [ext_resource type="PackedScene" uid="uid://buiitouvt7lgh" path="res://World/assets glb/small_tube1.glb" id="12_clck5"]
-[ext_resource type="PackedScene" uid="uid://dch6lk2wsixkx" path="res://World/assets glb/big_pipe.glb" id="12_evxwe"]
 [ext_resource type="ArrayMesh" uid="uid://b5ml4o71w6p2" path="res://World/assets obj/boxes1.obj" id="13_2idi0"]
 [ext_resource type="ArrayMesh" uid="uid://ctxwky6rrwsyr" path="res://World/assets obj/boxes3.obj" id="14_11wgs"]
 [ext_resource type="Texture2D" uid="uid://ch4xd1oo3ivi4" path="res://World/assets glb/textures/box1_Cardboard001_1K-JPG_Color.jpg" id="14_lcnlk"]
@@ -75,6 +75,8 @@ albedo_color = Color(0.01173987, 0.048211206, 0.15217325, 0.6745098)
 refraction_enabled = true
 
 [node name="testtestlevel" type="Node3D"]
+
+[node name="SampleGame" parent="." instance=ExtResource("1_qx7ok")]
 
 [node name="Player" parent="." instance=ExtResource("2_y3a61")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26.960423, 0, 2.6330047)

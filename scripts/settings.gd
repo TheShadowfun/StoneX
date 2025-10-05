@@ -23,5 +23,6 @@ func reload_settings():
 
 func _on_back_pressed():
 	hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pre_scene.reset_focus()
 	AudioManager.play_button_sound()
